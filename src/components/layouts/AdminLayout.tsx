@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const AdminLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { token } = useSelector((state: RootState) => state.auth);
+  const token = localStorage.getItem("token");
 
   // Nếu token không tồn tại, redirect về login
   useEffect(() => {

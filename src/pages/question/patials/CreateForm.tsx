@@ -13,9 +13,16 @@ type Props = {
   onAdd: (data: any) => void;
   onEdit: (data: any) => void;
   onClearEdit: () => void;
+  author: string;
 };
 
-const CreateForm = ({ editData, onAdd, onEdit, onClearEdit }: Props) => {
+const CreateForm = ({
+  editData,
+  onAdd,
+  onEdit,
+  onClearEdit,
+  author,
+}: Props) => {
   const defaultValues: QuestionFormInputs = {
     text: "",
     keywords: "",
@@ -63,6 +70,7 @@ const CreateForm = ({ editData, onAdd, onEdit, onClearEdit }: Props) => {
         : [],
       options: data.options.map((o) => o.value),
       correctAnswerIndex: Number(data.correctAnswerIndex),
+      author,
     };
 
     console.log("pa", payload);

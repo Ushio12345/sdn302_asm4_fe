@@ -20,6 +20,8 @@ const QuestionPage = () => {
   const { loading, error, questions, current } = useSelector(
     (state: RootState) => state.question
   );
+  const author = JSON.parse(localStorage.getItem("user") || "{}")?.userId;
+
   const [showConfirm, setShowConfirm] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const [quizIdToDelete, setQuizIdToDelete] = useState<string | null>(null);
@@ -82,6 +84,7 @@ const QuestionPage = () => {
         onAdd={handleAddQuestion}
         onEdit={handleUpdateQuestion}
         onClearEdit={handleClearEdit}
+        author={author}
       />
 
       {loading && (

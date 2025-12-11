@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${token}`,
-    };
+    } as unknown as import("axios").AxiosRequestHeaders;
   }
   return config;
 });

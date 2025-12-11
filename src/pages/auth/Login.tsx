@@ -39,6 +39,7 @@ export default function Login() {
       } else {
         // Register
         const registerResp = await authServices.register(formData);
+        console.log(registerResp);
 
         toast.success("Register successful! You can login now.");
 

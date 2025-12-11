@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { fetchAllQuizzes, setCurrent } from "../../store/slices/quizSlice";
-import type { RootState } from "../../store/store";
+import { type AppDispatch, type RootState } from "../../store/store";
 import type { QuizType } from "../../types/quiz.type";
 
 const HomePage = () => {
   const { quizzes, loading } = useSelector((state: RootState) => state.quiz);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   useEffect(() => {

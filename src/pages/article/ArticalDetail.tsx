@@ -92,7 +92,7 @@ const ArticalDetail = () => {
         {questionsList.length > 0 ? (
           <div className="space-y-6">
             {questionsList.map((qs: any) => (
-              <QuestionItem key={qs._id} data={qs} onDelete={} />
+              <QuestionItem key={qs._id} data={qs} onDelete={() => {}} />
             ))}
           </div>
         ) : (
