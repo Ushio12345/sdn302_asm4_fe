@@ -58,10 +58,13 @@ const CreateForm = ({ editData, onAdd, onEdit, onClearEdit }: Props) => {
   const onSubmit = (data: QuestionFormInputs) => {
     const payload = {
       ...data,
-      keywords: data.keywords.split(",").map((k) => k.trim()),
+      keywords: data.keywords
+        ? data.keywords.split(",").map((k) => k.trim())
+        : [],
       options: data.options.map((o) => o.value),
       correctAnswerIndex: Number(data.correctAnswerIndex),
     };
+
     console.log("pa", payload);
 
     if (editData) {

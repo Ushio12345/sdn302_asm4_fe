@@ -78,7 +78,7 @@ const QuestionPage = () => {
       <h2 className="text-3xl font-bold mb-6">Manage Questions</h2>
 
       <CreateForm
-        editData={current}
+        editData={current ?? null}
         onAdd={handleAddQuestion}
         onEdit={handleUpdateQuestion}
         onClearEdit={handleClearEdit}

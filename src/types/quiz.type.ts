@@ -3,7 +3,7 @@ export interface QuestionType {
   options: string[];
   keywords?: string[];
   correctAnswerIndex: number;
-  author: string;
+  author: any;
   _id: string;
 }
 
