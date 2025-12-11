@@ -3,10 +3,11 @@ import type { QuestionType } from "../../../types/quiz.type";
 
 type Props = {
   data: QuestionType;
-  getCrr: (vl: QuestionType) => void;
-  onDelete: (vl: string) => void;
+  getCrr?: (vl: QuestionType) => void;
+  onDelete?: (vl: string) => void;
+  showActions?: boolean;
 };
-const QuestionItem = ({ data, getCrr, onDelete }: Props) => {
+const QuestionItem = ({ data, getCrr, onDelete, showActions }: Props) => {
   return (
     <div className="border p-4 bg-white mb-3">
       <h3>{data.text}</h3>
@@ -32,12 +33,24 @@ const QuestionItem = ({ data, getCrr, onDelete }: Props) => {
       </div>
 
       <p>Author: {data.author.userName}</p>
-      <Button variant="warning" className="mr-2" onClick={() => getCrr(data)}>
-        Edit
-      </Button>
-      <Button variant="danger" onClick={() => onDelete(data._id)}>
-        Delete
-      </Button>
+      {showActions && (
+        <div className="mt-2">
+          {getCrr && (
+            <Button
+              variant="warning"
+              className="mr-2"
+              onClick={() => getCrr(data)}
+            >
+              Edit
+            </Button>
+          )}
+          {onDelete && (
+            <Button variant="danger" onClick={() => onDelete(data._id)}>
+              Delete
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

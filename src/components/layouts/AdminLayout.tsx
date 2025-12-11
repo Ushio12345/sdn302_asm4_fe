@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router";
 import { logout } from "../../store/slices/authSlice";
-import type { AppDispatch, RootState } from "../../store/store";
+import type { AppDispatch } from "../../store/store";
 import { useEffect } from "react";
 
 const AdminLayout = () => {

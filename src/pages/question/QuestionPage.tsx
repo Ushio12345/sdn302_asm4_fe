@@ -101,6 +101,7 @@ const QuestionPage = () => {
           data={qs}
           getCrr={handleGetQuestion}
           onDelete={handleDeleteClick}
+          showActions={true}
         />
       ))}
 
