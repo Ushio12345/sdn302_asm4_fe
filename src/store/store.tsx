@@ -1,0 +1,11 @@
+import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./slices/authSlice";
+import quizSlice from "./slices/quizSlice";
+import questionSlice from "./slices/questionSlice";
+export const store = configureStore({
+  reducer: { auth: authSlice, quiz: quizSlice, question: questionSlice },
+});
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
