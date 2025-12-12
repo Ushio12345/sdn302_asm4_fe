@@ -9,6 +9,7 @@ import Loading from "../../components/ui/loading/Loading";
 import { useNavigate, useParams } from "react-router";
 import AddQuestionModal from "./patials/AddQuestionQuizModal";
 import type { QuestionType } from "../../types/quiz.type";
+import { toast } from "react-toastify";
 
 const ArticalDetail = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,33 +36,27 @@ const ArticalDetail = () => {
   }
 
   if (error) {
-    return (
-      <p className="text-red-600 text-center py-10 text-xl">
-        Lỗi tải Quiz: {error}
-      </p>
-    );
+    return <p className="text-red-600 text-center py-10 text-xl">{error}</p>;
   }
 
   if (!current) {
-    return (
-      <p className="text-gray-500 text-center py-10 text-xl">
-        Không tìm thấy Quiz này.
-      </p>
-    );
+    return <p className="text-gray-500 text-center py-10 text-xl">Not found</p>;
   }
 
   const questionsList = current.questions || [];
 
   const handleAddOneQuestion = async (data: QuestionType) => {
     try {
-      console.log(data);
-
       const res = await dispatch(
         addQuestion({
           quizId: current._id,
           questionData: data,
         })
       ).unwrap();
+
+      dispatch(getQuizById(id));
+
+      toast.success(`Add question in quiz successfully.`);
 
       console.log("Add question success:", res);
     } catch (error) {
@@ -79,14 +74,14 @@ const ArticalDetail = () => {
           {current.description || "Chưa có mô tả chi tiết."}
         </p>
         <div className="text-sm text-gray-500 mt-2">
-          Tổng số câu hỏi:{" "}
+          Number of question:{" "}
           <span className="font-semibold">{questionsList.length}</span>
         </div>
       </header>
 
       <section className="mt-8">
         <h2 className="text-2xl font-bold mb-4 text-gray-800 border-l-4 border-indigo-500 pl-3">
-          Danh sách Câu hỏi
+          List question
         </h2>
 
         {questionsList.length > 0 ? (
@@ -98,7 +93,7 @@ const ArticalDetail = () => {
         ) : (
           <div className="text-center py-10 border border-dashed border-gray-300 rounded-lg bg-gray-50">
             <p className="text-gray-500">
-              Quiz này chưa có câu hỏi nào được thêm.
+              This quiz does not have any question
             </p>
           </div>
         )}
@@ -111,7 +106,7 @@ const ArticalDetail = () => {
           className="bg-gray-300 hover:bg-gray-400 text-gray-800"
           onClick={() => navigate(-1)}
         >
-          &larr; Quay lại
+          &larr; Go back
         </Button>
       </footer>
     </div>

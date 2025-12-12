@@ -30,6 +30,7 @@ export default function AddQuestionModal({ onAddQuestion }: Props) {
     reset,
     formState: { errors },
     watch,
+    setValue,
   } = useForm<QuestionFormInputs>({
     resolver: zodResolver(questionSchema),
     defaultValues: defaultValues,
@@ -48,7 +49,7 @@ export default function AddQuestionModal({ onAddQuestion }: Props) {
         ? data.keywords.split(",").map((k) => k.trim())
         : [],
       options: data.options.map((opt) => opt.value),
-      correctAnswerIndex: data.correctAnswerIndex,
+      correctAnswerIndex: Number(data.correctAnswerIndex),
     };
 
     onAddQuestion(newQuestion); // Gọi callback
@@ -100,29 +101,25 @@ export default function AddQuestionModal({ onAddQuestion }: Props) {
             </h5>
 
             {fields.map((field, index) => (
-              <InputGroup key={field.id} className="mb-3">
-                {/* Radio Button cho Đáp án Đúng */}
+              <InputGroup key={field.id} className="mb-2">
                 <InputGroup.Radio
-                  {...register("correctAnswerIndex", { valueAsNumber: true })}
                   value={index}
-                  checked={index === watch("correctAnswerIndex")} // Watch để cập nhật trạng thái
-                  aria-label={`Chọn đáp án ${index + 1}`}
+                  checked={index === Number(watch("correctAnswerIndex"))}
+                  onChange={() => setValue("correctAnswerIndex", index)}
                 />
 
-                {/* Input nhập nội dung Option */}
                 <Form.Control
-                  placeholder={`Lựa chọn ${index + 1}`}
-                  {...register(`options.${index}.value` as const)}
+                  placeholder={`Option ${index + 1}`}
+                  {...register(`options.${index}.value`)}
                   isInvalid={!!errors.options?.[index]?.value}
                 />
 
-                {/* Nút Xóa Option */}
-                {fields.length > 2 && ( // Chỉ cho phép xóa khi có > 2 lựa chọn
+                {fields.length > 2 && (
                   <Button
                     variant="outline-danger"
                     onClick={() => remove(index)}
                   >
-                    Xóa
+                    Delete
                   </Button>
                 )}
               </InputGroup>

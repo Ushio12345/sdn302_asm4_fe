@@ -32,7 +32,7 @@ const QuestionItem = ({ data, getCrr, onDelete, showActions }: Props) => {
         })}
       </div>
 
-      <p>Author: {data.author.userName}</p>
+      {data.author.userName && <p>Author: {data.author.userName}</p>}
       {showActions && (
         <div className="mt-2">
           {getCrr && (

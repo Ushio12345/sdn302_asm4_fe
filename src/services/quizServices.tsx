@@ -27,6 +27,6 @@ export const quizService = {
       `/quizzes/${quizId}/question`,
       qsPayload
     );
-    return res.data;
+    return res;
   },
 };
