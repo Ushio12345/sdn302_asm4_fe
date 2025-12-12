@@ -53,8 +53,9 @@ const ArticalDetail = () => {
           questionData: data,
         })
       ).unwrap();
-
-      dispatch(getQuizById(id));
+      if (id) {
+        dispatch(getQuizById(id));
+      }
 
       toast.success(`Add question in quiz successfully.`);
 
